@@ -38,4 +38,4 @@ EOF
 
 echo Install Pip Package...
 docker-compose build
-docker-compose run --rm ${DOCKER_COMPOSE_SERVICE_NAME} pip install -r /tmp/requirements.txt
+docker-compose run --rm ${DOCKER_COMPOSE_SERVICE_NAME} pip install -r /tmp/requirements-dev.txt
