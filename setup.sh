@@ -12,7 +12,7 @@ echo Host Python Version Check...
 HOST_PYTHON_VERSION=$(python3 --version | sed -E "s/\s|\.[0-9]+$//g")
 
 echo Docker Python Version Check...
-DOCKER_PYTHON_VERSION=$(docker-compose run --rm ${DOCKER_COMPOSE_SERVICE_NAME} python3 --version | sed -E "s/\s|\.[0-9]+$//g")
+DOCKER_PYTHON_VERSION=$(docker-compose run --rm ${DOCKER_COMPOSE_SERVICE_NAME} python3 --version | sed -E "s/\s|\.[0-9]+\s*$//g")
 
 if [ -d ${APPLICATION_ROOT}/.venv ]; then
     rm -rf ${APPLICATION_ROOT}/.venv
