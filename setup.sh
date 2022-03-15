@@ -30,7 +30,7 @@ services:
         - ${DOCKER_COMPOSE_SERVICE_NAME}_site-packages-data:/usr/local/lib/${DOCKER_PYTHON_VERSION,,}/site-packages
 EOF
 
-VOLUME_PATH=$(docker inspect --format='{{.Mounts}}' $(docker-compose ps -q central) | tr " " "\n" | grep volume | grep site-packages-data)
+VOLUME_PATH=$(docker inspect --format='{{.Mounts}}' $(docker-compose ps -q ${DOCKER_COMPOSE_SERVICE_NAME}) | tr " " "\n" | grep volume | grep site-packages-data)
 
 if [ -d ${APPLICATION_ROOT}/.venv ]; then
     rm -rf ${APPLICATION_ROOT}/.venv
