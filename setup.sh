@@ -10,6 +10,7 @@ DOCKER_COMPOSE_SERVICE_NAME=${INPUT_DOCKER_COMPOSE_SERVICE_NAME:-"app"}
 
 echo Host Python Version Check...
 HOST_PYTHON_VERSION=$(python3 --version | sed -E "s/\s|\.[0-9]+$//g")
+echo ${HOST_PYTHON_VERSION}
 
 if [ -d docker-compose.override.yml ]; then
     mv docker-compose.override.yml docker-compose.override.yml.bk
@@ -21,7 +22,9 @@ volumes:
 EOF
 
 echo Docker Python Version Check...
-DOCKER_PYTHON_VERSION=$(docker-compose run --rm ${DOCKER_COMPOSE_SERVICE_NAME} python3 --version | sed -E "s/\s|\.[0-9]+\s*$//g")
+docker-compose build ${DOCKER_COMPOSE_SERVICE_NAME}
+DOCKER_PYTHON_VERSION=$(docker-compose run ${DOCKER_COMPOSE_SERVICE_NAME} python3 --version | sed -E "s/\s|\.[0-9]+\s*$//g")
+echo ${DOCKER_PYTHON_VERSION}
 
 cat <<EOF >> docker-compose.override.yml
 services:
@@ -50,6 +53,5 @@ direnv allow ${APPLICATION_ROOT}
 wait
 
 
-echo Install Pip Package...
-docker-compose build
+echo Install PIP Package...
 docker-compose run --rm ${DOCKER_COMPOSE_SERVICE_NAME} pip install -r /tmp/requirements-dev.txt
