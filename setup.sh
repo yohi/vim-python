@@ -25,7 +25,7 @@ volumes:
 EOF
 
 echo Docker Python Version Check...
-DOCKER_PYTHON_VERSION=$(docker-compose run ${DOCKER_COMPOSE_SERVICE_NAME} python3 --version | sed -E "s/\s|\.[0-9]+\s*$//g")
+DOCKER_PYTHON_VERSION=$(docker-compose run --rm ${DOCKER_COMPOSE_SERVICE_NAME} python3 --version | sed -E "s/\s|\.[0-9]+\s*$//g")
 printf "${ESC}[31m%s${ESC}[m\n" ${DOCKER_PYTHON_VERSION}
 
 cat <<EOF >> docker-compose.override.yml
