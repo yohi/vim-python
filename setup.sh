@@ -36,7 +36,7 @@ services:
 EOF
 
 echo Volume Path...
-docker-compose create --build ${DOCKER_COMPOSE_SERVICE_NAME}
+docker-compose create ${DOCKER_COMPOSE_SERVICE_NAME}
 VOLUME_PATH=$(docker inspect --format='{{.Mounts}}' $(docker-compose ps -q ${DOCKER_COMPOSE_SERVICE_NAME}) | tr " " "\n" | grep volume | grep site-packages-data)
 printf "${ESC}[31m%s${ESC}[m\n" ${VOLUME_PATH}
 
@@ -58,4 +58,5 @@ direnv allow ${APPLICATION_ROOT}
 wait
 
 echo Install PIP Package...
+docker-compose build --no-cache
 docker-compose run --rm ${DOCKER_COMPOSE_SERVICE_NAME} pip install -r /tmp/requirements-dev.txt
