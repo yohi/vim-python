@@ -32,7 +32,7 @@ cat <<EOF >> docker-compose.override.yml
 services:
     ${DOCKER_COMPOSE_SERVICE_NAME}:
       volumes:
-        - ${DOCKER_COMPOSE_SERVICE_NAME}_site-packages-data:/usr/local/lib/${DOCKER_PYTHON_VERSION,,}/site-packages
+        - ${DOCKER_COMPOSE_SERVICE_NAME}_site-packages-data:/usr/local/lib/${DOCKER_PYTHON_VERSION,,}/site-packages:ro
 EOF
 
 echo Volume Path...
