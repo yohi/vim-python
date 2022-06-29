@@ -22,6 +22,7 @@ fi
 cat <<EOF > docker-compose.override.yml
 volumes:
     ${DOCKER_COMPOSE_SERVICE_NAME}_site-packages-data:
+        driver: local
 EOF
 
 echo Docker Python Version Check...
