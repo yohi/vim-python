@@ -2,10 +2,10 @@
 
 ESC=$(printf '\033')
 
-echo Application Root? [default: django/app]:
+echo Application Root? [default: django/project]:
 read INPUT_APPLICATION_ROOT
 
-APPLICATION_ROOT=${INPUT_APPLICATION_ROOT:-"django/app"}
+APPLICATION_ROOT=${INPUT_APPLICATION_ROOT:-"django/project"}
 
 echo Docker Compose Service Name? [default: app]:
 read INPUT_DOCKER_COMPOSE_SERVICE_NAME
@@ -32,7 +32,7 @@ cat <<EOF >> docker-compose.override.yml
 services:
     ${DOCKER_COMPOSE_SERVICE_NAME}:
       volumes:
-        - ${DOCKER_COMPOSE_SERVICE_NAME}_site-packages-data:/usr/local/lib/${DOCKER_PYTHON_VERSION,,}/site-packages:ro
+        - ${DOCKER_COMPOSE_SERVICE_NAME}_site-packages-data:/usr/local/lib/${DOCKER_PYTHON_VERSION,,}/site-packages
 EOF
 
 echo Volume Path...
