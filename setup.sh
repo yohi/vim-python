@@ -59,7 +59,7 @@ direnv allow ${APPLICATION_ROOT}
 wait
 
 echo Install PIP Package...
-source .venv/bin/activate
+source ${APPLICATION_ROOT}/.venv/bin/activate
 pip3 install -r django/requirements-dev.txt
 # docker-compose build --no-cache
 # docker-compose run --rm ${DOCKER_COMPOSE_SERVICE_NAME} pip install -r /tmp/requirements-dev.txt
